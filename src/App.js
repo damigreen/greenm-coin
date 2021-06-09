@@ -11,6 +11,7 @@ import {
   Link,
   Redirect
 } from "react-router-dom";
+import AccountCard from './components/account card';
 
 
 // import logo from './logo.svg';
@@ -41,6 +42,7 @@ function App() {
     <Router>
       <div className="App">
         <Header />
+        <AccountCard />
       </div>
     </Router>
   );

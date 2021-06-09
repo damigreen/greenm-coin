@@ -1,0 +1,20 @@
+.card-md {
+  margin: 0 auto;
+  width: 80%;
+  height: 20vh;
+  justify-content: flex-start;
+  border-radius: 3px;
+  box-shadow: 0 10px 45px 0 rgb(0 0 0 / 10%);
+}
+
+.bal {
+  color: var(--btn-color1);
+}
+
+.bal-val {
+  color: var(--highlight);
+  border-bottom: 1px solid var(--gray-one);
+  width: 100%;
+  text-align: center;
+  padding-bottom: 1.1342rem;
+}
