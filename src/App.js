@@ -16,7 +16,6 @@ import {
 // import logo from './logo.svg';
 
 function App() {
-  const [page, setPage] = useState('home')
   const [user, setUser] = useState(null);
   // const [user, setUser] = useState('dami');
   // const [loggedIn, setIsLoggedIn] = useState(false);
@@ -26,18 +25,13 @@ function App() {
     return (
       <Router>
         <Switch>
-          <Route exact path='/'>
-            <Login
-              show={page === 'login'}
-            />
+          <Route exact path='/signup'>
+            <Signup />
           </Route>
-
-          <Route path='/signup'>
-            <Signup
-              show={page === 'signup'}
-            />
+          <Route path='/'>
+            <Redirect to="/login" />
+            <Login />
           </Route>
-
         </Switch>
       </Router>
     )
@@ -46,9 +40,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Home
-          show={page === 'home'}
-        />
+        <Home />
       </div>
     </Router>
   );
