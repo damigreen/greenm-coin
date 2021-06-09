@@ -1,3 +1,22 @@
+.card-wrap {
+  border: 1px solid gold;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+
+@media only screen and (min-width: 767px) {
+  .card-wrap {
+    /* width: 100%; */
+  }
+}
+
+@media only screen and (min-width: 1032px) {
+  .card-wrap {
+    /* width: 100%; */
+  }
+}
+
 .card-md {
   margin: 0 auto;
   width: 80%;
@@ -5,6 +24,8 @@
   justify-content: flex-start;
   border-radius: 3px;
   box-shadow: 0 10px 45px 0 rgb(0 0 0 / 10%);
+  margin-bottom: 30px;
+  padding: 20px;
 }
 
 .bal {
@@ -17,4 +38,102 @@
   width: 100%;
   text-align: center;
   padding-bottom: 1.1342rem;
+}
+
+.card-links {
+  width: 100%;
+}
+
+.link-history {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-image: url('../../assets/images/history.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.link-send {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-image: url('../../assets/images/send.png');
+  background-size: contain;
+  border: 1px solid hotpink;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.link-fund {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-image: url('../../assets/images/wallet.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.card-send {
+  /* border: 3px solid green; */
+  justify-self: center;
+  align-self: center;
+  align-items: stretch;
+  margin: 0 auto;
+  width: 80%;
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 3px;
+  box-shadow: 0 10px 45px 0 rgb(0 0 0 / 10%);
+}
+
+.send-heading {
+  color: var(--headline);
+  margin-bottom: 2rem;
+}
+
+.user-div {
+  background: var(--highlight2);
+  height: 6.5vh;
+}
+
+.user-img {
+  border-radius: 50%;
+  border: 1px solid var(--highlight);
+  width: 40px;
+  height: 40px;
+  background-image: url('../../assets//images/user.png');
+  background-size: cover;
+  background-position: center center;
+}
+
+.card-form {
+  flex: 0 0 70%;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.form-input {
+  background: var(--highlight2);
+  width: 100%;
+  height: 6.5vh;
+  border: none;
+}
+
+.price-row {
+  margin-top: 20px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.price-sel {
+  padding: 7px;
+  width: 14vw;
+  margin-left: 20px;
+  justify-content: center;
+}
+
+.price-sel:first-child {
+  margin-left: 0;
 }
