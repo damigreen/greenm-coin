@@ -17,7 +17,7 @@ const Signup = () => {
           <div className="login-row flex-col">
             <div className='login-intro'>
               <h1>Join Us</h1>
-              <p>Create an account today to start sending and receiving money</p>
+              <p>Create an account today to start sending and receiving money at your convenience</p>
             </div>
 
             <Form className='form-wrap'>

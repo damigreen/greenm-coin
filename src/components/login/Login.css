@@ -20,20 +20,19 @@
 }
 @media only screen and (min-width: 767px) {
   .login-row {
-    width: 40%;
+    width: 60%;
   }
 }
 
 @media only screen and (min-width: 1032px) {
   .login-row {
-    width: 25%;
+    width: 40%;
   }
 }
 
 .login-intro {
-  /* margin: 0 auto; */
   padding: 20px 20px;
-  /* border: 1px solid red; */
+  align-self: flex-start;
 }
 
 .bg-login {
