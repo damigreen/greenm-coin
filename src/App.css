@@ -1,3 +1,24 @@
+:root {
+  --header-bg: linear-gradient(-48deg, #0DCBE5 -30%, #365899 60%);
+  --bg-color: #f8f5f2;
+  --paragraph: #222525;
+  --btn-txt: #232323;
+  --btn-txt1: #fffffe;
+  --headline: #232323;
+  --btn-color: #078080; 
+  --btn-color1: #6246ea; 
+  
+  --stroke: #232323;
+  --highlight: #078080;
+  --highlight1: #6246ea;
+  --main: #fffffe;
+  --secondary: #f45d48;
+  --secondary1: #d1d1e9;
+  --tertiary: #f8f5f2;
+
+  --gray-one: #c4c4c4;
+}
+
 h1,h2,h3,h4,h5,h6 {
   margin: 0;
   padding: 0;
@@ -7,4 +28,8 @@ h1,h2,h3 {
   margin-bottom: 30px;
   font-weight: 500;
   
+}
+
+.App {
+  background-color: #F4F8FB;
 }
