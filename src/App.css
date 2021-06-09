@@ -11,6 +11,7 @@
   --stroke: #232323;
   --highlight: #078080;
   --highlight1: #6246ea;
+  --highlight2: #c6d3eb;
   --main: #fffffe;
   --secondary: #f45d48;
   --secondary1: #d1d1e9;
@@ -32,4 +33,50 @@ h1,h2,h3 {
 
 .App {
   background-color: #F4F8FB;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.f-xxm {
+  flex: 0 0 5%;
+}
+
+.f-xm {
+  flex: 0 0 10%;
+}
+
+.f-xm {
+  flex: 0 0 20%;
+}
+
+.f-md {
+  flex: 0 0 33.33333%;
+}
+
+.f-lg {
+  flex: 0 0 50%;
+}
+
+.f-xlg {
+  flex: 0 0 60%;
+}
+
+.f-xxlg {
+  flex: 0 0 70%;
+} 
+
+.f-xxlg {
+  flex: 0 0 80%;
 }
