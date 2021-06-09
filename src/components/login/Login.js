@@ -15,8 +15,8 @@ const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   return (
-    <Router>
-      <Switch>
+    // <Router>
+    //   <Switch>
         <div className="login-wrap flex-col bg-login">
           <div className="login-row flex-col">
             <div className='login-intro'>
@@ -52,9 +52,9 @@ const Login = () => {
           </div>
         </div>
 
-      </Switch>
+    //   </Switch>
 
-    </Router>
+    // </Router>
   )
 }
 
