@@ -1,0 +1,27 @@
+.header-wrap {
+  width: 100%;
+  height: 45vh;
+  border-bottom-left-radius: 80px;
+  border-bottom-right-radius: 80px;
+  background: var(--header-bg);
+}
+
+
+.user-avatar {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background-image: url('../../assets/images/avatar.png');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 2rem;
+}
+
+h3 {
+  color: var(--bg-color);
+}
+
+h6 {
+  color: var(--bg-color);
+}
