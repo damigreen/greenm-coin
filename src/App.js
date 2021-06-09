@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
-import Home from './components/home/';
+import Header from './components/header';
 import Login from './components/login';
 import Signup from './components/signup';
 import {
@@ -16,8 +16,8 @@ import {
 // import logo from './logo.svg';
 
 function App() {
-  const [user, setUser] = useState(null);
-  // const [user, setUser] = useState('dami');
+  // const [user, setUser] = useState(null);
+  const [user, setUser] = useState('dami');
   // const [loggedIn, setIsLoggedIn] = useState(false);
 
   if (user === null) {
@@ -40,7 +40,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Home />
+        <Header />
       </div>
     </Router>
   );
