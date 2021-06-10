@@ -74,6 +74,15 @@
   background-position: center top;
 }
 
+.card-style {
+  margin: 0 auto;
+  width: 80%;
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 3px;
+  box-shadow: 0 10px 45px 0 rgb(0 0 0 / 10%);
+}
+
 .card-send {
   /* border: 3px solid green; */
   justify-self: center;
@@ -113,6 +122,10 @@
   margin-right: 20px;
 }
 
+.para-style {
+  font-size: 1.2rem;
+}
+
 .form-input {
   background: var(--highlight2);
   width: 100%;
@@ -135,4 +148,18 @@
 
 .price-sel:first-child {
   margin-left: 0;
+}
+
+
+.trans-wrap {
+  padding: 20px;
+  width: 100%;
+}
+
+.trans-card {
+  margin-bottom: 30px;
+}
+
+.trans-style {
+  align-self: flex-start;
 }
