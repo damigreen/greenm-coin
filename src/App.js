@@ -12,6 +12,7 @@ import {
   Redirect
 } from "react-router-dom";
 import AccountCard from './components/account card';
+import Footer from './components/footer/Footer';
 
 
 // import logo from './logo.svg';
@@ -43,6 +44,7 @@ function App() {
       <div className="App">
         <Header />
         <AccountCard />
+        <Footer />
       </div>
     </Router>
   );

@@ -1,0 +1,6 @@
+.footer {
+  background-color: #3298C3;
+  color: var(--btn-color);
+  color: var(--bg-color);
+  padding: 1rem;
+}
