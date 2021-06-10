@@ -19,7 +19,7 @@ const AccountCard = () => {
 
       </div>
       
-      <div className='card-send'>
+      <form className='card-send'>
         <h4 className='send-heading'>Send money</h4>
         <div style={{marginBottom: '2rem'}}>
           <p>Enter phone number of recipient</p>
@@ -27,9 +27,9 @@ const AccountCard = () => {
             <div className='flex-col user-div f-xm'>
               <div className='user-img'></div>
             </div>
-            <form className='flex-row f-xxlg card-form'>
+            <div className='flex-row f-xxlg card-form'>
               <input className='form-input' type="text" placeholder='07000000000' />
-            </form>
+            </div>
           </div>
         </div>
 
@@ -39,9 +39,9 @@ const AccountCard = () => {
             <div className='flex-col user-div f-xm'>
               <h3 style={{color: '#222525'}} className>NGN</h3>
             </div>
-            <form className='flex-row f-xxlg card-form'>
+            <div className='flex-row f-xxlg card-form'>
               <input className='form-input' type="text" placeholder='3000' />
-            </form>
+            </div>
           </div>
           <div className='flex-row price-row'>
             <p className='user-div price-sel flex-row'>500</p>
@@ -49,9 +49,10 @@ const AccountCard = () => {
             <p className='user-div price-sel flex-row'>2000</p>
             <p className='user-div price-sel flex-row'>5000</p>
           </div>
-        </div>        
+        </div>
 
-      </div>
+        <button style={{color: '#fffffe'}} className='btn btn-submit' type='submit'>Send</button>
+      </form>
 
     </div>
   )

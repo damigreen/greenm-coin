@@ -1,5 +1,4 @@
 .card-wrap {
-  border: 1px solid gold;
   flex-wrap: wrap;
   justify-content: center;
 
@@ -100,7 +99,7 @@
 
 .user-img {
   border-radius: 50%;
-  border: 1px solid var(--highlight);
+  border: 1px solid var(--gray-one);
   width: 40px;
   height: 40px;
   background-image: url('../../assets//images/user.png');
