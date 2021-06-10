@@ -25,6 +25,7 @@
   box-shadow: 0 10px 45px 0 rgb(0 0 0 / 10%);
   margin-bottom: 30px;
   padding: 20px;
+  background-color: var(--btn-txt1);
 }
 
 .bal {
@@ -81,6 +82,8 @@
   padding: 20px;
   border-radius: 3px;
   box-shadow: 0 10px 45px 0 rgb(0 0 0 / 10%);
+  background-color: var(--btn-txt1);
+
 }
 
 .card-send {
@@ -94,6 +97,8 @@
   padding: 20px;
   border-radius: 3px;
   box-shadow: 0 10px 45px 0 rgb(0 0 0 / 10%);
+  background-color: var(--btn-txt1);
+
 }
 
 .send-heading {
@@ -162,4 +167,8 @@
 
 .trans-style {
   align-self: flex-start;
+}
+
+.debit {
+  color: red;
 }

@@ -26,6 +26,7 @@ const transaction = [
   }
 ]
 
+
 const AccountCard = () => {
 
 
@@ -104,22 +105,33 @@ const AccountCard = () => {
 
       <div style={{margin: '0 auto', width: '80%'}}>
         <h4 className="send-heading">Transaction History</h4>
-
         {
-          transaction.map(tran => (
-            <div className='trans-wrap card-style'>
-              <div className='trans-info flex-col'>
-                <p className='trans-style trans-time'>{tran.time}</p>
-                <p className='trans-style trans-type'>{tran.type}</p>
-                <p className='trans-style trans-account'>{tran.account}</p>
-                <p className='trans-style trans-id'>{tran.id}</p>
-              </div>
+          transaction.map(tran => {
+            if (tran.type === 'Account Debit') {
+              console.log(tran.type);
 
-              <div>
-                <p className='trans-style trans-price'>{tran.price}</p>
+              const debitElem = document.getElementsByClassName('.trans-style');
+              // const debitElem = document.getElementById('id');
+              console.log(debitElem);
+              // debitElem.classList.add('debit')
+              debitElem.className += 'debit';
+            }
+
+            return (
+              <div key={tran.id} className='trans-wrap card-style flex-row'>
+                <div className='trans-info flex-col'>
+                  <p className='trans-style trans-time'>{tran.time}</p>
+                  <p id='id' className='trans-style trans-type'>{tran.type}</p>
+                  <p className='trans-style trans-account'>{tran.account}</p>
+                  <p className='trans-style trans-id'>{tran.id}</p>
+                </div>
+
+                <div>
+                  <p className='trans-style trans-price'>{tran.price}</p>
+                </div>
               </div>
-            </div>
-          ))
+            )
+          })
         }
       </div>
     </div>
