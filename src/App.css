@@ -95,3 +95,13 @@ p {
 .btn-submit {
   color: var(--btn-txt1);
 }
+
+.btn-logout {
+  background-color: #f45d48;
+  color: #f4f4f4;
+  border-color: #f45d48;
+  border-radius: 3px;
+  margin-top: 2rem;
+  padding: 0.273rem;
+  width: 7vw;
+}
