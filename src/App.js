@@ -15,11 +15,13 @@ import AccountCard from './components/account card';
 import Footer from './components/footer/Footer';
 import useField from './hook/';
 import loginServices from './services/login';
+import Notification from './components/notification/Notification';
 
 
 
 function App() {
   const [user, setUser] = useState(null);
+  const [message, setMessage] = useState(null);
   const email = useField('email').form;
   const password = useField('password').form;
 
@@ -46,6 +48,10 @@ function App() {
       setUser(user);
       console.log(user);
       window.localStorage.setItem('loginUser', JSON.stringify(user));
+      setMessage('You have successfully logged in');
+      setTimeout(() => {
+        setMessage(null);
+      }, 3000)
     } catch (e) {
       console.log(e);
     }
@@ -68,7 +74,12 @@ function App() {
           </Route>
           <Route path='/'>
             <Redirect to="/login" />
-            <Login setUser={setUser} handleLogin={handleLogin} email={email} password={password} />
+            <Login
+              setUser={setUser}
+              handleLogin={handleLogin}
+              email={email}
+              password={password}
+            />
           </Route>
         </Switch>
       </Router>
@@ -79,6 +90,7 @@ function App() {
     <Router>
       <div className="App">
         <Header user={user} handleLogout={handleLogout} />
+        <Notification message={message} variant='success' />
         <AccountCard />
         <Footer />
       </div>

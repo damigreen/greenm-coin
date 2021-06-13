@@ -3,15 +3,14 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link
 } from "react-router-dom";
+import Notification from '../notification/Notification';
 
 
 const Login = ({ setUser, handleLogin, email, password }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [message,  setMessage] = useState('');
   
 
   return (
@@ -41,6 +40,7 @@ const Login = ({ setUser, handleLogin, email, password }) => {
           <Button style={{width: '100%'}} variant="primary" type="submit">
             Submit
           </Button>
+          <Notification message={message} variant='success' />
         </Form>
 
 

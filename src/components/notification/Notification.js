@@ -7,7 +7,7 @@ const Notification = ({ variant, message }) => {
     }
 
   return (
-    <div>
+    <div className='flex-col'>
       <Alert variant={variant}>{message}</Alert>
     </div>
   )
