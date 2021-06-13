@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.css';
+import liteBankLogo from '../../assets/images/litebank-logo1.png'
 
 function Header({ user, handleLogout }) {
   const welcomeMessage = () => {
@@ -13,6 +14,7 @@ function Header({ user, handleLogout }) {
 
   return (
     <div className="header-wrap flex-col">
+      <img className='img-border' src={liteBankLogo} alt='applivation logo' />
       <div className='user-avatar'></div>
       <h4 className='user-name'>{user.name} is <span style={{color: '#27B8AC', fontStyle: 'italics' }}>loggedin</span></h4>
       <h6 className="user-mail">{`${user.email}`}</h6>

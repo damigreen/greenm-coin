@@ -27,8 +27,9 @@ const transaction = [
 ]
 
 
-const AccountCard = () => {
+const AccountCard = ({ users }) => {
 
+  console.log(users);
 
   return (
     <div className='flex-row card-wrap'>
