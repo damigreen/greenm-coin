@@ -8,32 +8,11 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import useField from '../../hook/';
-import loginServices from '../../services/login';
 
 
-
-const Login = ({ setUser }) => {
+const Login = ({ setUser, handleLogin, email, password }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const email = useField('email').form;
-  const password = useField('password').form;
-
-  const handleLogin = (e) => {
-    e.preventDefault();
   
-    console.log(`Loginin in ----`);
-
-    const loginObj = {
-      email: email.value,
-      password: password.value,
-    }
-
-    loginServices.login(loginObj).then(result => {
-      setUser(result);
-    })
-  }
-  
-
 
   return (
     <div className="login-wrap flex-col bg-login">
