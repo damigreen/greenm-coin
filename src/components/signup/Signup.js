@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {
@@ -7,7 +7,7 @@ import {
 import useField from '../../hook/';
 import signupService from '../../services/signup';
 import { useHistory } from 'react-router-dom';
-
+import Notification from '../notification/Notification';
 // function ValidateEmail(mail) 
 // {
 //  if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(myForm.emailAddr.value))
@@ -19,6 +19,8 @@ import { useHistory } from 'react-router-dom';
 // }
 
 const Signup = () => {
+  const [messageError, setMessageError] = useState('');
+  const [messageSuccess, setMessageSuccess] = useState('');
   const fullName = useField('text');
   const email = useField('email');
   const number = useField('number');
@@ -26,24 +28,34 @@ const Signup = () => {
   const confirmPassword = useField('password');
   const history = useHistory();
 
+
   const handleSignup = async(e) => {
     e.preventDefault();
+    const passwordConfirmed = password.form.value === confirmPassword.form.value;
 
-    if (password !== confirmPassword) {
-      console.log('Wrong password');
-    }
-
+    
     try {
-      console.log('signinng up ---');
-      const userObj = {
-        name: fullName.form.value,
-        number: number.form.value,
-        email: email.form.value,
-        password: password.form.value,
+      if (passwordConfirmed) {
+        const userObj = {
+          name: fullName.form.value,
+          number: number.form.value,
+          email: email.form.value,
+          password: password.form.value,
+        }
+  
+        await signupService.signup(userObj);
+        setMessageSuccess('You have successfully signed up to the app');
+        setTimeout(() => {
+          setMessageSuccess('');
+          history.push('/login');
+        }, 3000);
+      } else {
+        console.log('Wrong password');
+        setMessageError('Password does not match. Retry.')
+        setTimeout(() => {
+          setMessageError('');
+        }, 4000);
       }
-
-      const newUser = await signupService.signup(userObj);
-      history.push('/login')
 
     } catch (e) {
       console.log(e);
@@ -62,12 +74,12 @@ const Signup = () => {
         <Form onSubmit={handleSignup} className='form-wrap'>
           <Form.Group className="mb-3" controlId="formBasicFullName">
             <Form.Label>FullName</Form.Label>
-            <Form.Control { ...fullName.form } placeholder="Enter Full Name" />
+            <Form.Control { ...fullName.form } placeholder="Enter Full Name" required />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control { ...email.form } placeholder="Enter email" />
+            <Form.Control { ...email.form } placeholder="Enter email" required />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
@@ -75,7 +87,7 @@ const Signup = () => {
 
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Account Number</Form.Label>
-            <Form.Control { ...number.form } placeholder="Enter account" />
+            <Form.Control { ...number.form } placeholder="Enter account" required />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
@@ -83,13 +95,15 @@ const Signup = () => {
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control { ...password.form } placeholder="Password" />
+            <Form.Control { ...password.form } placeholder="Password" required />
           </Form.Group>
+
 
           <Form.Group className="mb-3" controlId="formBasicComfirmPassword">
             <Form.Label>Confirm Password</Form.Label>
-            <Form.Control { ...confirmPassword.form } placeholder="Comfirm Password" />
+            <Form.Control { ...confirmPassword.form } placeholder="Comfirm Password" required />
           </Form.Group>
+          <Notification message={messageError} variant='danger' />
 
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />
@@ -97,6 +111,7 @@ const Signup = () => {
           <Button style={{width: '100%'}} variant="primary" type="submit">
             Submit
           </Button>
+          <Notification message={messageSuccess} variant='success' />
         </Form>
 
 
