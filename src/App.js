@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/header';
 import Login from './components/login';
 import Signup from './components/signup';
@@ -18,9 +18,14 @@ import Footer from './components/footer/Footer';
 // import logo from './logo.svg';
 
 function App() {
-  // const [user, setUser] = useState(null);
-  const [user, setUser] = useState('dami');
+  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState('dami');
   // const [loggedIn, setIsLoggedIn] = useState(false);
+
+  console.log(user);
+  useEffect(() => {
+
+  }, [])
 
   if (user === null) {
     
@@ -32,7 +37,7 @@ function App() {
           </Route>
           <Route path='/'>
             <Redirect to="/login" />
-            <Login />
+            <Login setUser={setUser} />
           </Route>
         </Switch>
       </Router>
@@ -42,7 +47,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Header user={user} />
         <AccountCard />
         <Footer />
       </div>
