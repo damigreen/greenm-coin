@@ -16,26 +16,45 @@ import Footer from './components/footer/Footer';
 import useField from './hook/';
 import loginServices from './services/login';
 import Notification from './components/notification/Notification';
-
+import usersService from './services/users';
+import transactionService from './services/transactions';
 
 
 function App() {
+  const [users,  setUsers] = useState([]);
+  const [transactions, setTransactions] = useState([]);
+  
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState(null);
   const email = useField('email').form;
   const password = useField('password').form;
 
   useEffect(() => {
+    // Get all users
+    usersService.getAll().then(result => {
+      setUsers(result);
+    });
+
+    // Get all transactions
+    transactionService.getAll().then(result => {
+      setTransactions(result);
+    });
+  }, []);
+
+  
+  useEffect(() => {
     const loggedInUser = window.localStorage.getItem('loginUser');
     if (loggedInUser) {
       const currentUser = JSON.parse(loggedInUser);
       setUser(currentUser);
+      transactionService.setToken(currentUser.token);
     }
 
   }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
     try {
       console.log(`Loginin in ----`);
   
@@ -44,10 +63,17 @@ function App() {
         password: password.value,
       }
   
-      const user = await loginServices.login(loginObj);
-      setUser(user);
-      console.log(user);
-      window.localStorage.setItem('loginUser', JSON.stringify(user));
+      // User login
+      const loggedInUser = await loginServices.login(loginObj);
+      setUser(loggedInUser);
+
+      // Set token for logged in user
+      transactionService.setToken(loggedInUser.token);
+      transactionService.token = transactionService.setToken(loggedInUser.token);
+
+      // Store user in local storage
+      window.localStorage.setItem('loginUser', JSON.stringify(loggedInUser));
+
       setMessage('You have successfully logged in');
       setTimeout(() => {
         setMessage(null);
@@ -56,6 +82,9 @@ function App() {
       console.log(e);
     }
   }
+
+  // console.log(user);
+
 
   const handleLogout = () => {
     setUser(null);
@@ -91,7 +120,7 @@ function App() {
       <div className="App">
         <Header user={user} handleLogout={handleLogout} />
         <Notification message={message} variant='success' />
-        <AccountCard />
+        <AccountCard users={users} />
         <Footer />
       </div>
     </Router>
