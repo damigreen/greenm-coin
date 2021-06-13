@@ -17,15 +17,11 @@ import useField from './hook/';
 import loginServices from './services/login';
 
 
-// import logo from './logo.svg';
 
 function App() {
   const [user, setUser] = useState(null);
   const email = useField('email').form;
   const password = useField('password').form;
-
-  // const [user, setUser] = useState('dami');
-  // const [loggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const loggedInUser = window.localStorage.getItem('loginUser');
