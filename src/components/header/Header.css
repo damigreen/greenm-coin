@@ -18,10 +18,20 @@
   margin-bottom: 2rem;
 }
 
+.logout {
+  cursor: pointer;
+}
+
+.logout:hover {
+  text-decoration: none;
+  color: red;
+}
+
 h4 {
   color: var(--bg-color);
 }
 
 h6 {
   color: var(--bg-color);
+  margin-bottom: 1rem;
 }
