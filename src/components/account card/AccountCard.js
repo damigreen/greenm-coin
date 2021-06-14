@@ -8,9 +8,12 @@ import './AccountCard.css';
 const AccountCard = ({ user, users }) => {
   const [userTransactions, setUserTransactions] = useState([]);
   const [userBalance, setUserBalance] = useState('');
-  const [buttonValue, setButtonValue] = useState('');
-  const amountDebit = useField('number');
-  const amountCredit = useField('number');
+  const [credit, setCredit] = useState('')
+  const [debit, setDebit] = useState('')
+
+  let amountDebit = useField('number');
+  let amountCredit = useField('number');
+
   const accountToCredit = useField('text');
 
   // Get user account
@@ -33,21 +36,68 @@ const AccountCard = ({ user, users }) => {
     e.preventDefault();
 
     const creditObj = {
-      amount: parseInt(amountCredit.form.value),
+      amount: credit ,
     }
 
     // Handle credit object
     const newCreditTransaction = await transactionService.credit(creditObj);
     setUserTransactions(userTransactions.concat(newCreditTransaction));
     setUserBalance(userAccount.balance + newCreditTransaction.amount)
-    amountCredit.reset();
+    setCredit('');
   }
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setCredit(value);
+  }
+
+  const handleDebitChange = (e) => {
+    const value = e.target.value;
+    setDebit(value);
+  }
+
+  const buttonCreditElement = document.getElementById('price-row');
+  if (buttonCreditElement) {
+    // Get handler with event delegation
+    buttonCreditElement.addEventListener('click', function(e) {
+      // e,target is the clicked element
+      // if(e.target && e.target.nodeName == 'div') {
+      if(e.target) {
+        const value = e.target;
+        if (value) {
+          console.log(value.innerHTML);
+          amountCredit = parseInt(value.innerHTML);
+          setCredit(amountCredit)
+        }
+      }
+    });
+  }
+
+  const buttonDebitElement = document.getElementById('price-col');
+  if (buttonDebitElement) {
+    // Get handler with event delegation
+    buttonDebitElement.addEventListener('click', function(e) {
+      // e,target is the clicked element
+      // if(e.target && e.target.nodeName == 'div') {
+      if(e.target) {
+        const value = e.target;
+        console.log(value);
+        if (value) {
+          console.log(value.innerHTML);
+          amountDebit = parseInt(value.innerHTML);
+          setDebit(amountDebit)
+        }
+      }
+    });
+  }
+
+
 
   const handleDebit = async (e) => {
     e.preventDefault();
 
     const debitObj = {
-      amount: parseInt(amountDebit.form.value),
+      amount: debit,
       accountToCredit: accountToCredit.form.value
     }
 
@@ -57,15 +107,11 @@ const AccountCard = ({ user, users }) => {
     console.log(newDebitTransaction);
     setUserTransactions(userTransactions.concat(newDebitTransaction));
     setUserBalance(userAccount.balance - newDebitTransaction.amount)
-    amountDebit.reset();
-    accountToCredit.reset();
+    setDebit('');
   }
 
-  const handlePriceButton = (e) => {
-    // const button = e.target.value
-    // const price = document.querySelector('.price-select').innerHTML;
-  }
   
+
 
   return (
     <div className='flex-row card-wrap'>
@@ -92,14 +138,21 @@ const AccountCard = ({ user, users }) => {
                 <h5 style={{color: '#222525'}} className>NGN</h5>
               </div>
               <div className='flex-row f-xxlg card-form'>
-                <input className='form-input' {...amountCredit.form } placeholder='5000' />
+                <input className='form-input' type='text' value={credit} onChange={handleChange} placeholder='5000' />
               </div>
             </div>
-            <div className='flex-row price-row' onClick={handlePriceButton} >
+            {/* <div className='flex-row price-row' onClick={handlePriceButton} >
               <p className='user-div price-sel flex-row' value='500' onClick={handlePriceButton} >500</p>
               <p className='user-div price-sel flex-row' value='1000' onClick={handlePriceButton}>1000</p>
               <p className='user-div price-sel flex-row' value='2000' onClick={handlePriceButton}>2000</p>
               <p className='user-div price-sel flex-row' value='5000' onClick={handlePriceButton}>5000</p>
+            </div> */}
+
+            <div id='price-row' className='flex-row price-row' >
+              <p className='user-div price-sel flex-row' value='500'  >500</p>
+              <p className='user-div price-sel flex-row' value='1000' >1000</p>
+              <p className='user-div price-sel flex-row' value='2000' >2000</p>
+              <p className='user-div price-sel flex-row' value='5000' >5000</p>
             </div>
           </div>
 
@@ -127,10 +180,10 @@ const AccountCard = ({ user, users }) => {
                 <h5 style={{color: '#222525'}} className>NGN</h5>
               </div>
               <div className='flex-row f-xxlg card-form'>
-                <input className='form-input' { ...amountDebit.form } placeholder='3000' />
+                <input className='form-input' value={debit} onChange={handleDebitChange} placeholder='3000' />
               </div>
             </div>
-            <div className='flex-row price-row'>
+            <div id='price-col' className='flex-row price-row'>
               <p className='user-div price-sel flex-row'>500</p>
               <p className='user-div price-sel flex-row'>1000</p>
               <p className='user-div price-sel flex-row'>2000</p>
