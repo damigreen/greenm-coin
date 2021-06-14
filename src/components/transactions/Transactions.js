@@ -1,5 +1,6 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
+import { Link } from 'react-router-dom';
 
 const Transactions = ({  user, users }) => {
   const userTransaction = users.find(u => user.name === u.name);
@@ -14,7 +15,10 @@ const Transactions = ({  user, users }) => {
   }
 
   return (
-    <div>
+    <div> 
+      <Link className="flex-col center-align" to='/'>
+        <button className='align-left'>Go Back</button>
+      </Link>
       <h4>Transactions History</h4>
       {
         <Table  className='card-mr' style={{justifySelf: 'center', margin: '0 auto'}} striped bordered hover>

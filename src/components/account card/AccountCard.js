@@ -138,12 +138,6 @@ const AccountCard = ({ user, users }) => {
                 <input className='form-input' type='text' value={credit} onChange={handleChange} placeholder='5000' />
               </div>
             </div>
-            {/* <div className='flex-row price-row' onClick={handlePriceButton} >
-              <p className='user-div price-sel flex-row' value='500' onClick={handlePriceButton} >500</p>
-              <p className='user-div price-sel flex-row' value='1000' onClick={handlePriceButton}>1000</p>
-              <p className='user-div price-sel flex-row' value='2000' onClick={handlePriceButton}>2000</p>
-              <p className='user-div price-sel flex-row' value='5000' onClick={handlePriceButton}>5000</p>
-            </div> */}
 
             <div id='price-row' className='flex-row price-row' >
               <p className='user-div price-sel flex-row' value='500'  >500</p>
@@ -199,16 +193,15 @@ const AccountCard = ({ user, users }) => {
           <h4 className="send-heading card-md">Transaction History</h4>
           {
               userTransactions.map(tran => {
-            // transaction.map(tran => {
-              // if (tran.type === 'Account Debit') {
-              //   // console.log(tran.type);
+              if (tran.type === 'Account Debit') {
+                // console.log(tran.type);
 
-              //   const debitElem = document.getElementsByClassName('.trans-style');
-              //   // const debitElem = document.getElementById('id');
-              //   console.log(debitElem);
-              //   // debitElem.classList.add('debit')
-              //   debitElem.className += 'debit';
-              // }
+                const debitElem = document.getElementsByClassName('.trans-style');
+                // const debitElem = document.getElementById('id');
+                console.log(debitElem);
+                // debitElem.classList.add('debit')
+                debitElem.className += 'debit';
+              }
 
               return (
                 <div key={tran.id} className='card-md flex-row trans-card'>

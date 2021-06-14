@@ -20,6 +20,18 @@
 
 .center-align {
   margin: 0 auto;
+  margin-top: 2rem;
+  width: 60%;
+
+  @media (max-width: 767px) {
+    width: 90%;
+  }
+}
+
+.align-left {
+  align-self: flex-start;
+  justify-self: flex-start;
+  float: left;
 }
 
 .card-md {

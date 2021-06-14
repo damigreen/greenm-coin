@@ -103,5 +103,18 @@ p {
   border-radius: 3px;
   margin-top: 2rem;
   padding: 0.273rem;
-  width: 7vw;
+  width: 8vw;
+
+
+}
+@media only screen and (max-width: 1034px) {
+  .btn-logout {
+    width: 12vw;
+  }
+}
+
+@media only screen and (max-width: 565px) {
+  .btn-logout {
+    width: 20vw;
+  }
 }
