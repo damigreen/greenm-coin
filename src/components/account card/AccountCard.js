@@ -11,9 +11,6 @@ const AccountCard = ({ user, users }) => {
   const [credit, setCredit] = useState('')
   const [debit, setDebit] = useState('')
 
-  let amountDebit = useField('number');
-  let amountCredit = useField('number');
-
   const accountToCredit = useField('text');
 
   // Get user account
@@ -66,7 +63,7 @@ const AccountCard = ({ user, users }) => {
         const value = e.target;
         if (value) {
           console.log(value.innerHTML);
-          amountCredit = parseInt(value.innerHTML);
+          const amountCredit = parseInt(value.innerHTML);
           setCredit(amountCredit)
         }
       }
@@ -84,7 +81,7 @@ const AccountCard = ({ user, users }) => {
         console.log(value);
         if (value) {
           console.log(value.innerHTML);
-          amountDebit = parseInt(value.innerHTML);
+          const amountDebit = parseInt(value.innerHTML);
           setDebit(amountDebit)
         }
       }
