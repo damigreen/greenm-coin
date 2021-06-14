@@ -42,6 +42,7 @@
 
 .card-mr {
   flex: 0 0 60%;
+  align-self: flex-start;
 }
 
 @media only screen and (min-width: 767px) {
@@ -200,6 +201,7 @@
 
 .trans-card {
   margin-bottom: 30px;
+  justify-content: space-between;
 }
 
 .trans-style {

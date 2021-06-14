@@ -23,6 +23,7 @@ import transactionService from './services/transactions';
 function App() {
   const [users,  setUsers] = useState([]);
   const [transactions, setTransactions] = useState([]);
+  const [userTransaction, setUserTransaction] = useState([]);
   
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState(null);
@@ -39,6 +40,12 @@ function App() {
     transactionService.getAll().then(result => {
       setTransactions(result);
     });
+
+
+    const userAccount = users.find(u => u.name === user.name);
+    if (userAccount) {
+      setUserTransaction(userAccount.transactions.reverse());
+    }
   }, []);
 
   
@@ -49,8 +56,8 @@ function App() {
       setUser(currentUser);
       transactionService.setToken(currentUser.token);
     }
-
   }, []);
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -84,6 +91,7 @@ function App() {
   }
 
   // console.log(user);
+  console.log(userTransaction);
 
 
   const handleLogout = () => {
@@ -91,8 +99,6 @@ function App() {
     window.localStorage.removeItem('loginUser');
   }
   
-
-
   if (user === null) {
     
     return (
@@ -102,7 +108,6 @@ function App() {
             <Signup />
           </Route>
           <Route path='/'>
-            <Redirect to="/login" />
             <Login
               setUser={setUser}
               handleLogin={handleLogin}
@@ -120,7 +125,11 @@ function App() {
       <div className="App">
         <Header user={user} handleLogout={handleLogout} />
         <Notification message={message} variant='success' />
-        <AccountCard users={users} user={user} />
+        <AccountCard
+          users={users}
+          user={user}
+          userTransaction={userTransaction}
+        />
         <Footer />
       </div>
     </Router>

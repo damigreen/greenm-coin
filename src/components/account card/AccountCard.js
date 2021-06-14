@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './AccountCard.css';
 
 
@@ -27,9 +27,20 @@ const transaction = [
 ]
 
 
-const AccountCard = ({ user, users }) => {
+const AccountCard = ({ user, users, userTransaction }) => {
+  const userAccount = users.find(u => u.name === user.name);
+  console.log(userAccount);
+  
+  if (userAccount === undefined) {
+    return null;
+  }
 
-  console.log(users);
+  let transactionArray;
+  if (userTransaction) {
+    transactionArray = userTransaction.slice(0, 5)
+
+  }
+  console.log(transactionArray);
 
   return (
     <div className='flex-row card-wrap'>
@@ -37,7 +48,8 @@ const AccountCard = ({ user, users }) => {
       <div className="flex-col card-mr">
         <div className="flex-col card-md">
           <h4 className="bal card-md">Balance</h4>
-          <h3 className='bal-val'>₦2000</h3>
+          <h3 className='bal-val'>₦{userAccount.balance}</h3>
+          <h3 className='bal-val'>₦100000</h3>
           <div className='flex-row card-links'>
             <div className="link-history"></div>
             <div className="link-send"></div>
@@ -111,34 +123,36 @@ const AccountCard = ({ user, users }) => {
         <div className='trans-wrap'>
           <h4 className="send-heading card-md">Transaction History</h4>
           {
-            transaction.map(tran => {
-              if (tran.type === 'Account Debit') {
-                // console.log(tran.type);
+            transactionArray.map(tran => {
+            // transaction.map(tran => {
+              // if (tran.type === 'Account Debit') {
+              //   // console.log(tran.type);
 
-                const debitElem = document.getElementsByClassName('.trans-style');
-                // const debitElem = document.getElementById('id');
-                console.log(debitElem);
-                // debitElem.classList.add('debit')
-                debitElem.className += 'debit';
-              }
+              //   const debitElem = document.getElementsByClassName('.trans-style');
+              //   // const debitElem = document.getElementById('id');
+              //   console.log(debitElem);
+              //   // debitElem.classList.add('debit')
+              //   debitElem.className += 'debit';
+              // }
 
               return (
                 <div key={tran.id} className='card-md flex-row trans-card'>
                   <div className='trans-info flex-col'>
-                    <p className='trans-style trans-time'>{tran.time}</p>
-                    <p id='id' className='trans-style trans-type'>{tran.type}</p>
-                    <p className='trans-style trans-account'>{tran.account}</p>
-                    <p className='trans-style trans-id'>{tran.id}</p>
+                    <p className='trans-style trans-time'>{tran.date}</p>
+                    <p id='id' className='trans-style trans-type'>{tran.transactionType}</p>
+                    <p className='trans-style trans-account'>{tran.transactionAccount}</p>
+                    <p className='trans-style trans-id'>ID: {tran.id}</p>
                   </div>
 
                   <div>
-                    <p className='trans-style trans-price'>{tran.price}</p>
+                    <p className='trans-style trans-price'>{tran.amount}</p>
                   </div>
                 </div>
               )
-            })
+            }).reverse()
           }
 
+          <button style={{color: '#f4f4f4'}} className='btn'>Show More</button>
         </div>
       </div>
     </div>
