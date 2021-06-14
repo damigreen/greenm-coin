@@ -53,7 +53,6 @@ function App() {
     }
   }, []);
 
-  console.log(userTransaction);
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -76,6 +75,7 @@ function App() {
       // Store user in local storage
       window.localStorage.setItem('loginUser', JSON.stringify(loggedInUser));
     
+      console.log(loggedInUser.transactions)
       const UT = users.find(u => u.name === loggedInUser.name)
       window.localStorage.setItem('loginUser', JSON.stringify(loggedInUser));
       window.localStorage.setItem('UT', JSON.stringify(UT.transactions.reverse()));
@@ -90,14 +90,13 @@ function App() {
     }
   }
 
-
-
   const handleLogout = () => {
     setUser(null);
     setUserTransaction(null);
     window.localStorage.removeItem('loginUser');
     window.localStorage.removeItem('UT')
   }
+
   
   if (user === null) {
     // history.push('/login');

@@ -25,6 +25,15 @@ const credit = async (creditObj) => {
   return response.data;
 }
 
+const debit = async (debitObj) => {
+  const config = {
+    headers: { Authorization: token }
+  }
+  const response = await axios.post(creditUrl, debitObj, config);
+  return response.data;
+}
+
+
 export default {
   getAll,
   setToken,

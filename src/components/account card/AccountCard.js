@@ -1,49 +1,55 @@
 import React, { useState, useEffect } from 'react';
+import transactionService from '../../services/transactions';
+import useField from '../../hook/index';
+import _ from 'lodash';
 import './AccountCard.css';
 
 
-const transaction = [
-  {
-    time: '02 June, 2021 - 04:20PM',
-    type: 'Account Debit',
-    account: '+23409017755801',
-    price: 2000,
-    id: 'TRA-87778-7622'
-  },
-  {
-    time: '03 June, 2021 - 09:20PM',
-    type: 'Account Credit',
-    account: '+23409017755801',
-    price: 1000,
-    id: 'TRA-87738-7622'
-  },
-  {
-    time: '02 June, 2021 - 04:20PM',
-    type: 'Account Credit',
-    account: '+23409017755801',
-    price: 5000,
-    id: 'TRA-83838-7622'
-  }
-]
-
-
 const AccountCard = ({ user, users }) => {
-  const [userTransaction, setUserTransaction] = useState([]);
+  const [userTransactions, setUserTransactions] = useState([]);
+  const amountDebit = useField('number');
+  const amountCredit = useField('number');
+  const accountToCredit = useField('text');
 
-  useEffect(() => {
-    const transactions = window.localStorage.getItem('UT');
-    if (transactions) {
-      setUserTransaction(JSON.parse(transactions).slice(0,5));
-    }
-  }, [])
-
+  // Get user account
   const userAccount = users.find(u => u.name === user.name);
-  console.log(userTransaction);
+  console.log(userAccount)
+  useEffect(() => {
+    if (userAccount) {
+      setUserTransactions(userAccount.transactions);
+
+    }
+  }, [userAccount]);
+  
   
   if (userAccount === undefined) {
     return null;
   }
-  console.log(userTransaction)
+
+
+  const handleCredit = async (e) => {
+    e.preventDefault();
+
+    const creditObj = {
+      amount: parseInt(amountCredit.form.value),
+    }
+
+    // Handle credit object
+    const newCreditTransaction = await transactionService.credit(creditObj);
+    setUserTransactions(userTransactions.concat(newCreditTransaction));
+    amountCredit.reset();
+  }
+
+  // const handleDebit = async (e) => {
+  //   e.preventDefault();
+
+  //   const debitObj = {
+  //     amount: parseInt(amountDebit.form.value),
+  //     accountToCredit: accountToCredit.form.value
+  //   }
+
+  //   const newDebitTransaction = await transaction.debit(debitObj);
+  // }
   
 
   return (
@@ -62,7 +68,7 @@ const AccountCard = ({ user, users }) => {
 
         </div>
         
-        <form className='card-md'>
+        <form onSubmit className='card-md'>
           <h4 className='send-heading'>Send money</h4>
           <div style={{marginBottom: '2rem'}}>
             <p className='para-style'>Enter phone number of recipient</p>
@@ -83,7 +89,7 @@ const AccountCard = ({ user, users }) => {
                 <h5 style={{color: '#222525'}} className>NGN</h5>
               </div>
               <div className='flex-row f-xxlg card-form'>
-                <input className='form-input' type="text" placeholder='3000' />
+                <input className='form-input' { ...amountDebit.form } placeholder='3000' />
               </div>
             </div>
             <div className='flex-row price-row'>
@@ -98,7 +104,7 @@ const AccountCard = ({ user, users }) => {
         </form>
 
 
-        <form className='card-md'>
+        <form onSubmit={handleCredit} className='card-md'>
           <h4 className='send-heading'>Fund wallet</h4>
           <div>
             <p className='para-style'>How much do you want to fund</p>
@@ -107,7 +113,7 @@ const AccountCard = ({ user, users }) => {
                 <h5 style={{color: '#222525'}} className>NGN</h5>
               </div>
               <div className='flex-row f-xxlg card-form'>
-                <input className='form-input' type="text" placeholder='5000' />
+                <input className='form-input' {...amountCredit.form } placeholder='5000' />
               </div>
             </div>
             <div className='flex-row price-row'>
@@ -127,8 +133,7 @@ const AccountCard = ({ user, users }) => {
         <div className='trans-wrap'>
           <h4 className="send-heading card-md">Transaction History</h4>
           {
-            // transactionArray.map(tran => {
-            userTransaction.map(tran => {
+              userTransactions.map(tran => {
             // transaction.map(tran => {
               // if (tran.type === 'Account Debit') {
               //   // console.log(tran.type);
@@ -150,11 +155,11 @@ const AccountCard = ({ user, users }) => {
                   </div>
 
                   <div>
-                    <p className='trans-style trans-price'>{tran.amount}</p>
+                    <p className='trans-style trans-price'>₦{tran.amount}</p>
                   </div>
                 </div>
               )
-            })
+            }).reverse().slice(0, 5)
           }
 
           <button style={{color: '#f4f4f4'}} className='btn'>Show More</button>
