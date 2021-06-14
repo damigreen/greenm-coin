@@ -18,13 +18,13 @@ import loginServices from './services/login';
 import Notification from './components/notification/Notification';
 import usersService from './services/users';
 import transactionService from './services/transactions';
+import { useHistory } from 'react-router-dom';
 
 
 function App() {
   const [users,  setUsers] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [userTransaction, setUserTransaction] = useState([]);
-  
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState(null);
   const email = useField('email').form;
@@ -42,12 +42,7 @@ function App() {
     });
 
 
-    const userAccount = users.find(u => u.name === user.name);
-    if (userAccount) {
-      setUserTransaction(userAccount.transactions.reverse());
-    }
-  }, []);
-
+  }, [user]);  
   
   useEffect(() => {
     const loggedInUser = window.localStorage.getItem('loginUser');
@@ -58,7 +53,7 @@ function App() {
     }
   }, []);
 
-
+  console.log(userTransaction);
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -80,8 +75,13 @@ function App() {
 
       // Store user in local storage
       window.localStorage.setItem('loginUser', JSON.stringify(loggedInUser));
+    
+      const UT = users.find(u => u.name === loggedInUser.name)
+      window.localStorage.setItem('loginUser', JSON.stringify(loggedInUser));
+      window.localStorage.setItem('UT', JSON.stringify(UT.transactions.reverse()));
 
       setMessage('You have successfully logged in');
+      // history.push('/');
       setTimeout(() => {
         setMessage(null);
       }, 3000)
@@ -90,16 +90,17 @@ function App() {
     }
   }
 
-  // console.log(user);
-  console.log(userTransaction);
 
 
   const handleLogout = () => {
     setUser(null);
+    setUserTransaction(null);
     window.localStorage.removeItem('loginUser');
+    window.localStorage.removeItem('UT')
   }
   
   if (user === null) {
+    // history.push('/login');
     
     return (
       <Router>
@@ -108,6 +109,7 @@ function App() {
             <Signup />
           </Route>
           <Route path='/'>
+            {/* <Redirect to='/login' /> */}
             <Login
               setUser={setUser}
               handleLogin={handleLogin}

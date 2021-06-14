@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AccountCard.css';
 
 
@@ -27,20 +27,22 @@ const transaction = [
 ]
 
 
-const AccountCard = ({ user, users, userTransaction }) => {
+const AccountCard = ({ user, users }) => {
+  const [userTransaction, setUserTransaction] = useState([]);
+
+  useEffect(() => {
+    const transactions = window.localStorage.getItem('UT');
+    setUserTransaction(JSON.parse(transactions).slice(0,5));
+  }, [])
+
   const userAccount = users.find(u => u.name === user.name);
-  console.log(userAccount);
+  console.log(userTransaction);
   
   if (userAccount === undefined) {
     return null;
   }
-
-  let transactionArray;
-  if (userTransaction) {
-    transactionArray = userTransaction.slice(0, 5)
-
-  }
-  console.log(transactionArray);
+  console.log(userTransaction)
+  
 
   return (
     <div className='flex-row card-wrap'>
@@ -123,7 +125,8 @@ const AccountCard = ({ user, users, userTransaction }) => {
         <div className='trans-wrap'>
           <h4 className="send-heading card-md">Transaction History</h4>
           {
-            transactionArray.map(tran => {
+            // transactionArray.map(tran => {
+            userTransaction.map(tran => {
             // transaction.map(tran => {
               // if (tran.type === 'Account Debit') {
               //   // console.log(tran.type);
@@ -149,7 +152,7 @@ const AccountCard = ({ user, users, userTransaction }) => {
                   </div>
                 </div>
               )
-            }).reverse()
+            })
           }
 
           <button style={{color: '#f4f4f4'}} className='btn'>Show More</button>
