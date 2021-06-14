@@ -32,7 +32,9 @@ const AccountCard = ({ user, users }) => {
 
   useEffect(() => {
     const transactions = window.localStorage.getItem('UT');
-    setUserTransaction(JSON.parse(transactions).slice(0,5));
+    if (transactions) {
+      setUserTransaction(JSON.parse(transactions).slice(0,5));
+    }
   }, [])
 
   const userAccount = users.find(u => u.name === user.name);

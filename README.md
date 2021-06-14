@@ -15,6 +15,7 @@
 - **Full Name:** Damilola Faseun
 - **Email Address:** damilola.faseun@gmail.com
 - **Gitlab:** <https://gitlab.com/damigreen/>
+- **LinkedIn:** <https://www.linkedin.com/in/damilola-faseun-748602b1>
   
 ## Description
 
