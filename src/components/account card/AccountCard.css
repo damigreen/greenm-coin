@@ -18,6 +18,10 @@
   }
 }
 
+.center-align {
+  margin: 0 auto;
+}
+
 .card-md {
   width: 100%;
   justify-content: flex-start;
@@ -178,8 +182,12 @@
   border: none;
 }
 
+input {
+  padding-left: 0.5rem;
+}
+
 .form-input::placeholder {
-  padding-left: 2rem;
+  padding-left: 0.423rem;
 }
 
 .price-row {

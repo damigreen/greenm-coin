@@ -3,6 +3,7 @@ import transactionService from '../../services/transactions';
 import useField from '../../hook/index';
 import _ from 'lodash';
 import './AccountCard.css';
+import { Link } from 'react-router-dom';
 
 
 const AccountCard = ({ user, users }) => {
@@ -15,7 +16,6 @@ const AccountCard = ({ user, users }) => {
 
   // Get user account
   const userAccount = users.find(u => u.name === user.name);
-  console.log(userAccount);
   useEffect(() => {
     if (userAccount) {
       setUserBalance(userAccount.balance);
@@ -227,7 +227,9 @@ const AccountCard = ({ user, users }) => {
             }).reverse().slice(0, 5)
           }
 
-          <button style={{color: '#f4f4f4'}} className='btn'>Show More</button>
+          <Link to='/transactions'>
+            <button style={{color: '#f4f4f4'}} className='btn'>Show More</button>
+          </Link>
         </div>
       </div>
     </div>

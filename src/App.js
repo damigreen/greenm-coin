@@ -8,8 +8,6 @@ import {
   // HashRouter as Router,
   Switch,
   Route,
-  Link,
-  Redirect
 } from "react-router-dom";
 import AccountCard from './components/account card';
 import Footer from './components/footer/Footer';
@@ -19,6 +17,7 @@ import Notification from './components/notification/Notification';
 import usersService from './services/users';
 import transactionService from './services/transactions';
 import { useHistory } from 'react-router-dom';
+import Transactions from './components/transactions/';
 
 
 function App() {
@@ -29,6 +28,7 @@ function App() {
   const [message, setMessage] = useState(null);
   const email = useField('email').form;
   const password = useField('password').form;
+  
 
   useEffect(() => {
     // Get all users
@@ -41,8 +41,16 @@ function App() {
       setTransactions(result);
     });
 
+    // let userTrans
+    // if (users && user) {
+    //   userTrans = users.find(u => u.name === user.name);
+    // }
+    // console.log(userTrans);
+    // if (userTrans) {
+    //   setUserTransaction(userTrans.transactions);
+    // }
+  }, [user]);
 
-  }, [user]);  
   
   useEffect(() => {
     const loggedInUser = window.localStorage.getItem('loginUser');
@@ -97,7 +105,7 @@ function App() {
     window.localStorage.removeItem('UT')
   }
 
-  
+
   if (user === null) {
     // history.push('/login');
     
@@ -123,16 +131,28 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
-        <Header user={user} handleLogout={handleLogout} />
-        <Notification message={message} variant='success' />
-        <AccountCard
-          users={users}
-          user={user}
-          userTransaction={userTransaction}
-        />
+      <Switch>
+        <div className="App">
+          <Header user={user} handleLogout={handleLogout} />
+          <Notification message={message} variant='success' />
+          <Route exact path='/'>
+            <AccountCard
+              users={users}
+              user={user}
+              userTransaction={userTransaction}
+            />
+
+          </Route>
+          <Route exact path='/transactions' >
+            <Transactions
+              userTransaction={userTransaction}
+              user={user}
+              users={users}
+            />
+          </Route>
+        </div>
+      </Switch>
         <Footer />
-      </div>
     </Router>
   );
 }

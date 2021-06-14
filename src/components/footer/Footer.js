@@ -5,7 +5,7 @@ const Footer = () => {
 
   return (
     <div className='flex-col footer'>
-      <h5>LiteBank</h5>
+      <h5>&#169; LiteBank</h5>
     </div>
   )
 }
