@@ -9,6 +9,7 @@
   - [Features](#features)
   - [Technologies](#technologies)
   - [Installation](#installation)
+  - [Demo](#demo)
 
 ## Personal Details
 
@@ -52,3 +53,7 @@ git clone https://gitlab.com/damigreen/litbank-app.git
 cd litebank-app && yarn
 yarn start
 ```
+
+## Demo
+
+[LiteBank Demo](https://drive.google.com/file/d/1r4gJ54dyMpBT1PmobEcNHz8Axe_mqPW3/view?usp=sharing)

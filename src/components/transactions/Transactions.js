@@ -10,16 +10,8 @@ const Transactions = ({  user, users }) => {
     if (userTransaction) {
       setTransactionsHistory(userTransaction.transactions);
     }
-  }, [userTransaction, user]);
+  }, [userTransaction, user, transactionsHistory]);
 
-  // if (!userTransaction) {
-  //   return null;
-  // }
-
-  // let transactionHistory;
-  // if (userTransaction) {
-  //   transactionHistory = userTransaction.transactions;
-  // }
 
   return (
     <div> 
