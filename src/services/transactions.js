@@ -29,7 +29,7 @@ const debit = async (debitObj) => {
   const config = {
     headers: { Authorization: token }
   }
-  const response = await axios.post(creditUrl, debitObj, config);
+  const response = await axios.post(debitUrl, debitObj, config);
   return response.data;
 }
 
@@ -38,5 +38,6 @@ export default {
   getAll,
   setToken,
   credit,
+  debit,
   token,
 }

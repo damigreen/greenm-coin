@@ -7,17 +7,19 @@ import './AccountCard.css';
 
 const AccountCard = ({ user, users }) => {
   const [userTransactions, setUserTransactions] = useState([]);
+  const [userBalance, setUserBalance] = useState('');
+  const [buttonValue, setButtonValue] = useState('');
   const amountDebit = useField('number');
   const amountCredit = useField('number');
   const accountToCredit = useField('text');
 
   // Get user account
   const userAccount = users.find(u => u.name === user.name);
-  console.log(userAccount)
+  console.log(userAccount);
   useEffect(() => {
     if (userAccount) {
+      setUserBalance(userAccount.balance);
       setUserTransactions(userAccount.transactions);
-
     }
   }, [userAccount]);
   
@@ -37,19 +39,32 @@ const AccountCard = ({ user, users }) => {
     // Handle credit object
     const newCreditTransaction = await transactionService.credit(creditObj);
     setUserTransactions(userTransactions.concat(newCreditTransaction));
+    setUserBalance(userAccount.balance + newCreditTransaction.amount)
     amountCredit.reset();
   }
 
-  // const handleDebit = async (e) => {
-  //   e.preventDefault();
+  const handleDebit = async (e) => {
+    e.preventDefault();
 
-  //   const debitObj = {
-  //     amount: parseInt(amountDebit.form.value),
-  //     accountToCredit: accountToCredit.form.value
-  //   }
+    const debitObj = {
+      amount: parseInt(amountDebit.form.value),
+      accountToCredit: accountToCredit.form.value
+    }
 
-  //   const newDebitTransaction = await transaction.debit(debitObj);
-  // }
+    console.log(accountToCredit.form.value)
+
+    const newDebitTransaction = await transactionService.debit(debitObj);
+    console.log(newDebitTransaction);
+    setUserTransactions(userTransactions.concat(newDebitTransaction));
+    setUserBalance(userAccount.balance - newDebitTransaction.amount)
+    amountDebit.reset();
+    accountToCredit.reset();
+  }
+
+  const handlePriceButton = (e) => {
+    // const button = e.target.value
+    // const price = document.querySelector('.price-select').innerHTML;
+  }
   
 
   return (
@@ -58,8 +73,7 @@ const AccountCard = ({ user, users }) => {
       <div className="flex-col card-mr">
         <div className="flex-col card-md">
           <h4 className="bal card-md">Balance</h4>
-          <h3 className='bal-val'>₦{userAccount.balance}</h3>
-          <h3 className='bal-val'>₦100000</h3>
+          <h3 className='bal-val'>₦{userBalance}</h3>
           <div className='flex-row card-links'>
             <div className="link-history"></div>
             <div className="link-send"></div>
@@ -67,8 +81,32 @@ const AccountCard = ({ user, users }) => {
           </div>
 
         </div>
-        
-        <form onSubmit className='card-md'>
+      
+
+        <form onSubmit={handleCredit} className='card-md'>
+          <h4 className='send-heading'>Credit Account</h4>
+          <div>
+            <p className='para-style'>How much do you want to fund</p>
+            <div className='flex-row'>
+              <div className='flex-col user-div f-xm'>
+                <h5 style={{color: '#222525'}} className>NGN</h5>
+              </div>
+              <div className='flex-row f-xxlg card-form'>
+                <input className='form-input' {...amountCredit.form } placeholder='5000' />
+              </div>
+            </div>
+            <div className='flex-row price-row' onClick={handlePriceButton} >
+              <p className='user-div price-sel flex-row' value='500' onClick={handlePriceButton} >500</p>
+              <p className='user-div price-sel flex-row' value='1000' onClick={handlePriceButton}>1000</p>
+              <p className='user-div price-sel flex-row' value='2000' onClick={handlePriceButton}>2000</p>
+              <p className='user-div price-sel flex-row' value='5000' onClick={handlePriceButton}>5000</p>
+            </div>
+          </div>
+
+          <button style={{color: '#fffffe'}} className='btn btn-submit' type='submit'>Fund</button>
+        </form>
+
+        <form onSubmit={handleDebit} className='card-md'>
           <h4 className='send-heading'>Send money</h4>
           <div style={{marginBottom: '2rem'}}>
             <p className='para-style'>Enter phone number of recipient</p>
@@ -77,7 +115,7 @@ const AccountCard = ({ user, users }) => {
                 <div className='user-img'></div>
               </div>
               <div className='flex-row f-xxlg card-form'>
-                <input className='form-input' type="text" placeholder='07000000000' />
+                <input className='form-input' { ...accountToCredit.form } placeholder='07000000000' />
               </div>
             </div>
           </div>
@@ -103,29 +141,6 @@ const AccountCard = ({ user, users }) => {
           <button style={{color: '#fffffe'}} className='btn btn-submit' type='submit'>Send</button>
         </form>
 
-
-        <form onSubmit={handleCredit} className='card-md'>
-          <h4 className='send-heading'>Fund wallet</h4>
-          <div>
-            <p className='para-style'>How much do you want to fund</p>
-            <div className='flex-row'>
-              <div className='flex-col user-div f-xm'>
-                <h5 style={{color: '#222525'}} className>NGN</h5>
-              </div>
-              <div className='flex-row f-xxlg card-form'>
-                <input className='form-input' {...amountCredit.form } placeholder='5000' />
-              </div>
-            </div>
-            <div className='flex-row price-row'>
-              <p className='user-div price-sel flex-row'>500</p>
-              <p className='user-div price-sel flex-row'>1000</p>
-              <p className='user-div price-sel flex-row'>2000</p>
-              <p className='user-div price-sel flex-row'>5000</p>
-            </div>
-          </div>
-
-          <button style={{color: '#fffffe'}} className='btn btn-submit' type='submit'>Fund</button>
-        </form>
 
       </div>
 
