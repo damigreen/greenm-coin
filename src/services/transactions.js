@@ -1,17 +1,15 @@
 import axios from 'axios';
 
-const transactionsUrl = 'http://localhost:3001/api/transactions';
-const creditUrl = 'http://localhost:3001/api/transactions/credit';
-const debitUrl = 'http://localhost:3001/api/transactions/debit';
+const transactionsUrl = '/api/transactions';
+const creditUrl = '/api/transactions/credit';
+const debitUrl = '/api/transactions/debit';
 
 let token = null
-console.log('----------------------------------------------------------')
 
 const setToken = (tokenObj) => {
   token = `bearer ${tokenObj}`;
   return token;
 };
-console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++')
 
 
 const getAll = async () => {

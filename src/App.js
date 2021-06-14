@@ -120,7 +120,7 @@ function App() {
       <div className="App">
         <Header user={user} handleLogout={handleLogout} />
         <Notification message={message} variant='success' />
-        <AccountCard users={users} />
+        <AccountCard users={users} user={user} />
         <Footer />
       </div>
     </Router>

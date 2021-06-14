@@ -27,7 +27,7 @@ const transaction = [
 ]
 
 
-const AccountCard = ({ users }) => {
+const AccountCard = ({ user, users }) => {
 
   console.log(users);
 
