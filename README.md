@@ -20,7 +20,12 @@
   
 ## Description
 
-A banking application that allows you easily send and receive funds at the tap of your fingers.
+A banking application that allows you easily send and receive funds at the tap of your fingers. You can register on the app by providing your email and and a secure passsword. Provide your phone number for your account and register on the portal.
+
+These project is implemented useing react js for the front-end and express js on the bsckend. User authentication is required to send and receive funds as it requires you to sign up to perform transactions on the dashboard.
+
+Users can also check their transacion history on the application interface and sign off whenever they are through with their transactions
+
 These project was developed by Damilola Faseun for the Veegil full stack developer internship test.
 
 ## Features
