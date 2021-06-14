@@ -13,6 +13,7 @@
 ## Personal Details
 
 - **Full Name:** Damilola Faseun
+- **Project Link:** <https://immense-ravine-42285.herokuapp.com>
 - **Email Address:** damilola.faseun@gmail.com
 - **Gitlab:** <https://gitlab.com/damigreen/>
 - **LinkedIn:** <https://www.linkedin.com/in/damilola-faseun-748602b1>
