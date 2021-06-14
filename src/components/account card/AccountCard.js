@@ -117,11 +117,11 @@ const AccountCard = ({ user, users }) => {
         <div className="flex-col card-md">
           <h4 className="bal card-md">Balance</h4>
           <h3 className='bal-val'>₦{userBalance}</h3>
-          <div className='flex-row card-links'>
+          {/* <div className='flex-row card-links'>
             <div className="link-history"></div>
             <div className="link-send"></div>
             <div className="link-fund"></div>
-          </div>
+          </div> */}
 
         </div>
       
