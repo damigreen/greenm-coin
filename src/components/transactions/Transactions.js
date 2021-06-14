@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import { Link } from 'react-router-dom';
 
 const Transactions = ({  user, users }) => {
+  const [transactionsHistory, setTransactionsHistory] = useState([]);
   const userTransaction = users.find(u => user.name === u.name);
 
-  if (!userTransaction) {
-    return null;
-  }
+  useEffect(() => {
+    if (userTransaction) {
+      setTransactionsHistory(userTransaction.transactions);
+    }
+  }, [userTransaction, user]);
 
-  let transactionHistory;
-  if (userTransaction) {
-    transactionHistory = userTransaction.transactions;
-  }
+  // if (!userTransaction) {
+  //   return null;
+  // }
+
+  // let transactionHistory;
+  // if (userTransaction) {
+  //   transactionHistory = userTransaction.transactions;
+  // }
 
   return (
     <div> 
@@ -31,7 +38,7 @@ const Transactions = ({  user, users }) => {
             </tr>
           </thead>
           {
-            transactionHistory.map(transaction => {
+            transactionsHistory.map(transaction => {
               return (
                 <tbody key={transaction.id}>
                   <tr>

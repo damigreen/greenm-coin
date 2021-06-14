@@ -16,7 +16,7 @@ import loginServices from './services/login';
 import Notification from './components/notification/Notification';
 import usersService from './services/users';
 import transactionService from './services/transactions';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import Transactions from './components/transactions/';
 
 
@@ -28,6 +28,7 @@ function App() {
   const [message, setMessage] = useState(null);
   const email = useField('email').form;
   const password = useField('password').form;
+  const history = useHistory();
   
 
   useEffect(() => {
@@ -116,13 +117,13 @@ function App() {
             <Signup />
           </Route>
           <Route path='/'>
-            {/* <Redirect to='/login' /> */}
             <Login
               setUser={setUser}
               handleLogin={handleLogin}
               email={email}
               password={password}
-            />
+              />
+              <Redirect to='/' />
           </Route>
         </Switch>
       </Router>
