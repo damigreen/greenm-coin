@@ -4,21 +4,12 @@
 
 - [LiteBank App](#litebank-app)
   - [Table of Contents](#table-of-contents)
-  - [Personal Details](#personal-details)
   - [Description](#description)
   - [Features](#features)
   - [Technologies](#technologies)
   - [Installation](#installation)
   - [Demo](#demo)
 
-## Personal Details
-
-- **Full Name:** Damilola Faseun
-- **Project Link:** <https://immense-ravine-42285.herokuapp.com>
-- **Email Address:** damilola.faseun@gmail.com
-- **Gitlab:** <https://gitlab.com/damigreen/>
-- **LinkedIn:** <https://www.linkedin.com/in/damilola-faseun-748602b1>
-  
 ## Description
 
 A banking application that allows you easily send and receive funds at the tap of your fingers. You can register on the app by providing your email and and a secure passsword. Provide your phone number for your account and register on the portal.
@@ -28,8 +19,6 @@ These project is implemented useing react js for the front-end and express js on
 User authentication is required to send and receive funds as it requires you to sign up to perform transactions on the dashboard. Likwise, it provides a clean interface for performing transactions.
 
 Users can also check their transacion history on the application interface and sign off whenever they are through with their transactions. It has a full responsive layout optimised for mobile, tablet and desktop view.
-
-These project was developed by Damilola Faseun for the Veegil full stack developer internship test.
 
 ## Features
 
